@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>فروشگاه فارسی‌ساز بازی</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Tahoma, Arial, sans-serif;
+            background: #0b0b0d;
+            color: #fff;
+        }
+
+        /* HEADER */
+
+        header {
+            background: linear-gradient(135deg, #17171b, #0d0d0f);
+            padding: 30px 15px;
+            text-align: center;
+            border-bottom: 1px solid #29292e;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        header p {
+            color: #aaa;
+            margin: 10px 0 0;
+        }
+
+        /* NAV */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(15,15,18,0.95);
+            border-bottom: 1px solid #29292e;
+            padding: 12px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 14px;
+        }
+
+        /* CONTAINER */
+
+        .container {
+            max-width: 1150px;
+            margin: auto;
+            padding: 25px 15px;
+        }
+
+        /* SEARCH */
+
+        .search-box {
+            margin-bottom: 25px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            background: #18181c;
+            color: white;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: #777;
+        }
+
+        /* FILTER */
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .filter {
+            border: 1px solid #333;
+            background: #18181c;
+            color: white;
+            padding: 9px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .filter.active {
+            background: white;
+            color: black;
+        }
+
+        /* GAMES */
+
+        .games {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .game {
+            background: #17171a;
+            border: 1px solid #29292e;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+
+        .game:hover {
+            transform: translateY(-5px);
+            border-color: #555;
+        }
+
+        .game img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .info {
+            padding: 16px;
+        }
+
+        .info h2 {
+            font-size: 18px;
+            margin: 0 0 10px;
+        }
+
+        .version {
+            color: #999;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 19px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .buy {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: white;
+            color: #111;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .buy:hover {
+            opacity: 0.85;
+        }
+
+        /* CART */
+
+        #cart {
+            margin-top: 45px;
+            background: #17171a;
+            border: 1px solid #29292e;
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        #cart h2 {
+            margin-top: 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 0;
+            border-bottom: 1px solid #29292e;
+        }
+
+        .remove {
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 7px 10px;
+            cursor: pointer;
+        }
+
+        .cart-total {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .checkout {
+            width: 100%;
+            margin-top: 15px;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: white;
+            color: black;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* SUPPORT */
+
+        .support {
+            margin-top: 30px;
+            background: #17171a;
+            border: 1px solid #29292e;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .support a {
+            color: white;
+            font-weight: bold;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            padding: 35px 10px;
+            color: #777;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            header h1 {
+                font-size: 23px;
+            }
+
+            .games {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .game img {
+                height: 230px;
+            }
+
+            .info {
+                padding: 11px;
+            }
+
+            .info h2 {
+                font-size: 15px;
+            }
+
+            .price {
+                font-size: 16px;
+            }
+
+            .buy {
+                padding: 10px;
+                font-size: 13px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>🎮 فروشگاه فارسی‌ساز بازی</h1>
+
+    <p>
+        زیرنویس فارسی بازی‌های PS4
+    </p>
+
+</header>
+
+
+<nav>
+
+    <a href="#games">🎮 بازی‌ها</a>
+
+    <a href="#cart">🛒 سبد خرید</a>
+
+    <a href="#support">💬 پشتیبانی</a>
+
+</nav>
+
+
+<div class="container">
+
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="search"
+            placeholder="🔎 جستجوی نام بازی..."
+            onkeyup="searchGames()"
+        >
+
+    </div>
+
+
+    <!-- FILTER -->
+
+    <div class="filters">
+
+        <button
+            class="filter active"
+            onclick="filterGames('all', this)">
+            همه
+        </button>
+
+        <button
+            class="filter"
+            onclick="filterGames('ps4', this)">
+            PS4
+        </button>
+
+    </div>
+
+
+    <!-- GAMES -->
+
+    <div class="games" id="games">
+
+
+        <!-- GOD OF WAR -->
+
+        <div class="game" data-name="God of War Ragnarök" data-platform="ps4">
+
+            <img src="images/gow.jpg">
+
+            <div class="info">
+
+                <h2>God of War Ragnarök</h2>
+
+                <div class="version">
+                    PS4 • زیرنویس فارسی
+                </div>
+
+                <div class="price">
+                    ۱۰۰٬۰۰۰ تومان
+                </div>
+
+                <button
+                    class="buy"
+                    onclick="addToCart('God of War Ragnarök', 100000)">
+                    🛒 افزودن به سبد
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- RDR2 -->
+
+        <div class="game" data-name="Red Dead Redemption 2" data-platform="ps4">
+
+            <img src="images/rdr2.jpg">
+
+            <div class="info">
+
+                <h2>Red Dead Redemption 2</h2>
+
+                <div class="version">
+                    PS4 • زیرنویس فارسی
+                </div>
+
+                <div class="price">
+                    ۱۰۰٬۰۰۰ تومان
+                </div>
+
+                <button
+                    class="buy"
+                    onclick="addToCart('Red Dead Redemption 2', 100000)">
+                    🛒 افزودن به سبد
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- TLOU 1 -->
+
+        <div class="game" data-name="The Last of Us Part I" data-platform="ps4">
+
+            <img src="images/tlou1.jpg">
+
+            <div class="info">
+
+                <h2>The Last of Us Part I</h2>
+
+                <div class="version">
+                    PS4 • زیرنویس فارسی
+                </div>
+
+                <div class="price">
+                    ۱۰۰٬۰۰۰ تومان
+                </div>
+
+                <button
+                    class="buy"
+                    onclick="addToCart('The Last of Us Part I', 100000)">
+                    🛒 افزودن به سبد
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- TLOU 2 -->
+
+        <div class="game" data-name="The Last of Us Part II" data-platform="ps4">
+
+            <img src="images/tlou2.jpg">
+
+            <div class="info">
+
+                <h2>The Last of Us Part II</h2>
+
+                <div class="version">
+                    PS4 • زیرنویس فارسی
+                </div>
+
+                <div class="price">
+                    ۱۰۰٬۰۰۰ تومان
+                </div>
+
+                <button
+                    class="buy"
+                    onclick="addToCart('The Last of Us Part II', 100000)">
+                    🛒 افزودن به سبد
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- HOGWARTS -->
+
+        <div class="game" data-name="Hogwarts Legacy" data-platform="ps4">
+
+            <img src="images/hogwarts.jpg">
+
+            <div class="info">
+
+                <h2>Hogwarts Legacy</h2>
+
+                <div class="version">
+                    PS4 • زیرنویس فارسی
+                </div>
+
+                <div class="price">
+                    ۱۰۰٬۰۰۰ تومان
+                </div>
+
+                <button
+                    class="buy"
+                    onclick="addToCart('Hogwarts Legacy', 100000)">
+                    🛒 افزودن به سبد
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- CYBERPUNK -->
+
+        <div class="game" data-name="Cyberpunk 2077" data-platform="ps4">
+
+            <img src="images/cyberpunk.jpg">
+
+            <div class="info">
+
+                <h2>Cyberpunk 2077</h2>
+
+                <div class="version">
+                    PS4 • زیرنویس فارسی
+                </div>
+
+                <div class="price">
+                    ۱۰۰٬۰۰۰ تومان
+                </div>
+
+                <button
+                    class="buy"
+                    onclick="addToCart('Cyberpunk 2077', 100000)">
+                    🛒 افزودن به سبد
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- GTA V -->
+
+        <div class="game" data-name="GTA V" data-platform="ps4">
+
+            <img src="images/gtav.jpg">
+
+            <div class="info">
+
+                <h2>GTA V</h2>
+
+                <div class="version">
+                    PS4 • زیرنویس فارسی
+                </div>
+
+                <div class="price">
+                    ۱۰۰٬۰۰۰ تومان
+                </div>
+
+                <button
+                    class="buy"
+                    onclick="addToCart('GTA V', 100000)">
+                    🛒 افزودن به سبد
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- CART -->
+
+    <div id="cart">
+
+        <h2>🛒 سبد خرید</h2>
+
+        <div id="cartItems">
+            سبد خرید خالی است.
+        </div>
+
+        <div class="cart-total">
+
+            مجموع:
+            <span id="total">
+                ۰
+            </span>
+            تومان
+
+        </div>
+
+        <button
+            class="checkout"
+            onclick="checkout()">
+
+            💳 ادامه برای پرداخت
+
+        </button>
+
+    </div>
+
+
+    <!-- SUPPORT -->
+
+    <div class="support" id="support">
+
+        <h2>💬 پشتیبانی</h2>
+
+        <p>
+            اگر در خرید یا نصب زیرنویس مشکل داشتید، با ما در ارتباط باشید.
+        </p>
+
+        <p>
+            تلگرام:
+            <a href="https://t.me/poyan_oGo">
+                @poyan_oGo
+            </a>
+        </p>
+
+    </div>
+
+
+</div>
+
+
+<footer>
+
+    © 2026 فروشگاه فارسی‌ساز بازی
+
+</footer>
+
+
+<script>
+
+let cart = [];
+
+
+function addToCart(name, price) {
+
+    cart.push({
+        name: name,
+        price: price
+    });
+
+    updateCart();
+
+}
+
+
+function removeFromCart(index) {
+
+    cart.splice(index, 1);
+
+    updateCart();
+
+}
+
+
+function updateCart() {
+
+    const cartItems =
+        document.getElementById("cartItems");
+
+    const totalElement =
+        document.getElementById("total");
+
+
+    if (cart.length === 0) {
+
+        cartItems.innerHTML =
+            "سبد خرید خالی است.";
+
+        totalElement.innerText = "۰";
+
+        return;
+
+    }
+
+
+    let total = 0;
+
+    let html = "";
+
+
+    cart.forEach((item, index) => {
+
+        total += item.price;
+
+        html += `
+
+            <div class="cart-item">
+
+                <span>
+                    ${item.name}
+                    <br>
+                    ${item.price.toLocaleString('fa-IR')} تومان
+                </span>
+
+                <button
+                    class="remove"
+                    onclick="removeFromCart(${index})">
+
+                    حذف
+
+                </button>
+
+            </div>
+
+        `;
+
+    });
+
+
+    cartItems.innerHTML = html;
+
+    totalElement.innerText =
+        total.toLocaleString('fa-IR');
+
+}
+
+
+function searchGames() {
+
+    const search =
+        document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+
+    const games =
+        document.querySelectorAll(".game");
+
+
+    games.forEach(game => {
+
+        const name =
+            game.dataset.name.toLowerCase();
+
+
+        if (name.includes(search)) {
+
+            game.style.display = "";
+
+        } else {
+
+            game.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+function filterGames(type, button) {
+
+    const games =
+        document.querySelectorAll(".game");
+
+
+    document
+        .querySelectorAll(".filter")
+        .forEach(btn => {
+
+            btn.classList.remove("active");
+
+        });
+
+
+    button.classList.add("active");
+
+
+    games.forEach(game => {
+
+        if (
+            type === "all" ||
+            game.dataset.platform === type
+        ) {
+
+            game.style.display = "";
+
+        } else {
+
+            game.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+function checkout() {
+
+    if (cart.length === 0) {
+
+        alert("سبد خرید شما خالی است.");
+
+        return;
+
+    }
+
+
+    alert(
+        "صفحه پرداخت در مرحله بعد به سایت اضافه می‌شود."
+    );
+
+}
+
+</script>
+
+
+</body>
+</html>
