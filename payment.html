@@ -3,20 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>پرداخت</title>
+  <title>پرداخت سفارش</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b0b0b;
+      color: white;
+      text-align: center;
+    }
+
+    .box {
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 25px;
+      background: #171717;
+      border-radius: 18px;
+    }
+
+    h1 {
+      color: #00ff88;
+    }
+
+    .price {
+      font-size: 25px;
+      color: #00ff88;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+
+    .card {
+      background: #222;
+      padding: 18px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+
+    .card-number {
+      font-size: 20px;
+      font-weight: bold;
+      direction: ltr;
+      letter-spacing: 1px;
+      margin: 12px 0;
+    }
+
+    .contact {
+      margin-top: 20px;
+      line-height: 2;
+    }
+
+    .contact a {
+      color: #00ff88;
+      text-decoration: none;
+    }
+
+    .warning {
+      color: #ffc107;
+      margin-top: 20px;
+    }
+  </style>
 </head>
+
 <body>
 
-  <h1>پرداخت محصول</h1>
+  <div class="box">
 
-  <p>محصول: <span id="product">در حال دریافت...</span></p>
-  <p>مبلغ: <span id="price">در حال دریافت...</span></p>
-  <p>CUSA: <span id="cusa">در حال دریافت...</span></p>
-  <p>نسخه: <span id="version">در حال دریافت...</span></p>
+    <h1>💳 پرداخت سفارش</h1>
 
-  <button onclick="startPayment()">پرداخت</button>
+    <p>محصول انتخابی:</p>
+    <strong id="product">در حال دریافت...</strong>
+
+    <p>مبلغ قابل پرداخت:</p>
+    <div class="price" id="price">در حال دریافت...</div>
+
+    <p>CUSA:</p>
+    <strong id="cusa">ثبت نشده</strong>
+
+    <p>نسخه:</p>
+    <strong id="version">ثبت نشده</strong>
+
+    <div class="card">
+
+      <h3>💳 اطلاعات واریز</h3>
+
+      <p>لطفاً مبلغ بالا را به کارت زیر واریز کنید:</p>
+
+      <div class="card-number">
+        6219861451905698
+      </div>
+
+      <p>به نام:</p>
+      <strong>پویان بازیاری دلاور</strong>
+
+    </div>
+
+    <div class="contact">
+
+      <h3>📸 ارسال فیش پرداخت</h3>
+
+      <p>بعد از واریز، تصویر فیش را برای ما ارسال کنید:</p>
+
+      <p>
+        Telegram:
+        <a href="https://t.me/poyan_oGo" target="_blank">
+          @poyan_oGo
+        </a>
+      </p>
+
+      <p>Eitaa: poyan_namber8</p>
+
+    </div>
+
+    <div class="warning">
+      ⚠️ پس از بررسی و تأیید پرداخت، سفارش شما ارسال می‌شود.
+    </div>
+
+  </div>
 
   <script>
+
     const params = new URLSearchParams(window.location.search);
 
     const product = params.get("product") || "محصول آزمایشی";
@@ -25,22 +131,14 @@
     const version = params.get("version") || "ثبت نشده";
 
     document.getElementById("product").textContent = product;
-    document.getElementById("price").textContent = price;
+
+    document.getElementById("price").textContent =
+      Number(price).toLocaleString("fa-IR") + " تومان";
+
     document.getElementById("cusa").textContent = cusa;
+
     document.getElementById("version").textContent = version;
 
-    async function startPayment() {
-  try {
-    const response = await fetch("/.netlify/functions/create-payment");
-
-    const data = await response.json();
-
-    alert(data.message);
-
-  } catch (error) {
-    alert("خطا در اتصال به سرور");
-  }
-      }
   </script>
 
 </body>
