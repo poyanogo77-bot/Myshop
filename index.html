@@ -798,12 +798,17 @@ function checkout() {
 
     }
 
+    const item = cart[0];
 
-    alert(
-        "صفحه پرداخت در مرحله بعد به سایت اضافه می‌شود."
-    );
+    const url =
+        "payment.html?product=" + encodeURIComponent(item.name) +
+        "&price=" + encodeURIComponent(item.price) +
+        "&cusa=" + encodeURIComponent(item.cusa || "ثبت نشده") +
+        "&version=" + encodeURIComponent(item.version || "ثبت نشده");
 
-}
+    window.location.href = url;
+
+            }
 
 </script>
 
