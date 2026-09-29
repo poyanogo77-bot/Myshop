@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>پرداخت</title>
+</head>
+<body>
+
+  <h1>پرداخت محصول</h1>
+
+  <p>محصول: <span id="product">در حال دریافت...</span></p>
+  <p>مبلغ: <span id="price">در حال دریافت...</span></p>
+  <p>CUSA: <span id="cusa">در حال دریافت...</span></p>
+  <p>نسخه: <span id="version">در حال دریافت...</span></p>
+
+  <button onclick="startPayment()">پرداخت</button>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+
+    const product = params.get("product") || "محصول آزمایشی";
+    const price = params.get("price") || "100000";
+    const cusa = params.get("cusa") || "ثبت نشده";
+    const version = params.get("version") || "ثبت نشده";
+
+    document.getElementById("product").textContent = product;
+    document.getElementById("price").textContent = price;
+    document.getElementById("cusa").textContent = cusa;
+    document.getElementById("version").textContent = version;
+
+    function startPayment() {
+      alert("در حال اتصال به درگاه پرداخت...");
+    }
+  </script>
+
+</body>
+</html>
